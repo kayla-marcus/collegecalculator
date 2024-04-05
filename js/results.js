@@ -19,7 +19,7 @@ var semPersonalExpenses = Math.round(localStorage.getItem("personalExpenses"));
 var semFinancialAid = Math.round(localStorage.getItem("financialAid"));
 var semfinalCost = Math.round(localStorage.getItem("finalCost"));
 
-semTuition = addCommas(semTuition);
+semTuition = semTuition;
 document.getElementById("calcTuitionCost").innerHTML = semTuition;
 
 semRent = addCommas(semRent);
