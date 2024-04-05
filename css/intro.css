@@ -9,6 +9,9 @@
     margin-top: 1rem;
 }
 
+.main__intro button {
+    margin-bottom: 3rem;
+
 @media (max-width: 1200px) {
     .main__intro {
         margin-left: 4rem;
