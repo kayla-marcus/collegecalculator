@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Semantic HTML / Semantic CSS + BEM (Block, Element, Modifier)-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./js/calculations.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Ridgewater College Cost Calculator</title>
+</head>
+
+<body class="page">
+    <header>
+        <h1 class="header__title"><b>Ridgewater College</b> Cost Calculator</h1>
+    </header>
+    <main class="main__results">
+        <h2>Results</h2>
+        <button class="downloadResults downloadResults--shadow downloadResults--hover downloadResults--active" onclick="window.print()"><span class="downloadResults--content">Download as PDF</span></button>
+        <div>
+            <h3>Estimated Final Cost (semester)</h4>
+                <span>$</span><span id="calcFinalCost"></span>
+        </div>
+        <div class="results results--flex">
+            <div>
+                <h4>Tuition Cost</h4>
+                <span>$</span><span id="calcTuitionCost"></span>
+            </div>
+            <div>
+                <h4>Room & Boarding</h4>
+                <span>$</span><span id="calcRoomBoard"></span>
+            </div>
+            <div>
+                <h4>Books & Suppplies</h4>
+                <span>$</span><span id="calcBooksSupplies"></span>
+            </div>
+            <div>
+                <h4>Personal Expenses</h4>
+                <span>$</span><span id="calcPersonalExps"></span>
+            </div>
+            <div>
+                <h4>Transportation Expenses</h4>
+                <span>$</span><span id="calcTransExps"></span>
+            </div>
+            <div>
+                <h4>Financial Aid</h4>
+                <span>$</span><span id="calcFinancialAid"></span>
+            </div>
+        </div>
+    </main>
+    <section class="container__piechart">
+        <div class="container__totalCost totalCost--flex">
+            <canvas id="totalCostChart"></canvas>
+            <canvas id="tuitionVsOtherExpenses"></canvas>
+        </div>
+        <div class="container__finalCost finalCost--flex">
+            <div class="finalCost--section">
+                <h3>Final Cost <span>including financial aid</span></h3>
+                <p>College students have several options to explore for financial aid. Here are some common ways to secure financial assistance:</p>
+                <ul>
+                    <li><strong>FAFSA (Free Application for Federal Student Aid):</strong> The FAFSA is a crucial step in obtaining federal financial aid. It helps determine your eligibility for grants, scholarships, work-study programs, and federal student loans.</li>
+                    <li><strong>Work-Study Programs:</strong> Federal Work-Study provides part-time jobs for undergraduate students with financial need, allowing them to earn money to help pay education expenses.</li>
+                    <li><strong>College-Specific Aid:</strong> Ridgewater College Foundation provides over $250,000 worth of scholarships to part-time and full-time students each year. Visit <a href="https://ridgewater.edu/alumni-friends/ridgewater-college-foundation/scholarships/">our scholarship page</a> to learn more about our universal online scholarship application!</li>
+                </ul>
+            </div>
+            <canvas id="finalCostChart"></canvas>
+        </div>
+    </section>
+
+    <!-- The following two scripts are from Charts.js library -->
+    <script>
+        var semTuition = Math.round(localStorage.getItem("semesterTuition"));
+        var semRent = Math.round(localStorage.getItem("semesterRent"));
+        var booksSuppliesCost = Math.round(localStorage.getItem("booksSuppliesCost"));
+        var semTravelCost = Math.round(localStorage.getItem("travelCost"));
+        var semPersonalExpenses = Math.round(localStorage.getItem("personalExpenses"));
+        var semFinancialAid = Math.round(localStorage.getItem("financialAid"));
+        var semTotalCost = Math.round(localStorage.getItem("totalCost"));
+        var semfinalCost = Math.round(localStorage.getItem("finalCost"));
+
+        var tuitionPerct = Math.round(((semTuition / semTotalCost) * 100));
+        var roomBoardPerct = Math.round(((semRent / semTotalCost) * 100));
+        var booksSuppliesPerct = Math.round(((booksSuppliesCost / semTotalCost) * 100));
+        var travelCostPerct = Math.round(((semTravelCost / semTotalCost) * 100));
+        var personalExpensesPerct = Math.round(((semPersonalExpenses / semTotalCost) * 100));
+        var financialAidPerct = Math.round(((semFinancialAid / semTotalCost) * 100));
+
+        const xValues = ["Tuition", "Room & Boarding", "Books & Supplies", "Personal Expenses", "Transportation Expenses"];
+        const yValues = [tuitionPerct, roomBoardPerct, booksSuppliesPerct, personalExpensesPerct, travelCostPerct];
+        const sliceColors = [
+            "#420012",
+            "#ff0044",
+            "#6d001d",
+            "#ff5683",
+            "#a02f4d"
+        ];
+
+        new Chart("totalCostChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: sliceColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'left',
+                },
+                title: {
+                    display: true,
+                    text: '% of Total Cost (Individual Expenses)'
+                }
+            }
+        });
+    </script>
+    <script>
+        var semTotalCost = Math.round(localStorage.getItem("totalCost"));
+        var semTuition = Math.round(localStorage.getItem("semesterTuition"));
+        var semOtherExpenses;
+
+        semOtherExpenses = ((semTotalCost - semTuition));
+        var tuitionPerct = Math.round(((semTuition / semTotalCost) * 100));
+        var OtherExpensesPerct = Math.round(((semOtherExpenses / semTotalCost) * 100));
+
+        const cValues = ["Tuition", "Other Expenses"];
+        const dValues = [tuitionPerct, OtherExpensesPerct];
+        const partColors = [
+            "#420012",
+            "#ff0044",
+        ];
+
+        new Chart("tuitionVsOtherExpenses", {
+            type: "pie",
+            data: {
+                labels: cValues,
+                datasets: [{
+                    backgroundColor: partColors,
+                    data: dValues
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: '% of Total Cost (Tuition vs. Other Expenses)'
+                }
+            }
+        });
+    </script>
+    <script>
+        var semFinancialAid = Math.round(localStorage.getItem("financialAid"));
+        var semTotalCost = Math.round(localStorage.getItem("totalCost"));
+        var semfinalCost = Math.round(localStorage.getItem("finalCost"));
+
+        var financialAidPerct = Math.round(((semFinancialAid / semTotalCost) * 100));
+        var finalCostPerct = Math.round(((semfinalCost / semTotalCost) * 100));
+
+        const aValues = ["What You Pay", "Financial Aid"];
+        const bValues = [finalCostPerct, financialAidPerct];
+        const pieceColors = [
+            "#420012",
+            "#ff0044",
+        ];
+
+        new Chart("finalCostChart", {
+            type: "pie",
+            data: {
+                labels: aValues,
+                datasets: [{
+                    backgroundColor: pieceColors,
+                    data: bValues
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: '% of Total Cost (Financial Aid vs. What You Pay)'
+                }
+            }
+        });
+    </script>
+    <script src="./js/results.js" async></script>
+</body>
+
+</html>

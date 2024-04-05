@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Semantic HTML / Semantic CSS + BEM (Block, Element, Modifier)-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./js/form.js" async></script>
+    <script src="./js/collapseSections.js" async></script>
+    <script src="./js/calculations.js" async></script>
+    <title>Ridgewater College Cost Calculator</title>
+</head>
+
+<body class="page page--background-red">
+    <header>
+        <h1 class="header__title"><b>Ridgewater College</b> Cost Calculator</h1>
+    </header>
+    <main class="main main__form">
+        <hr><br>
+        <form id="regForm" action="" method="post" class="form--bordered form--radio-checked">
+            <div style="text-align:center;margin-top:40px;">
+                <span class="stepTop"></span>
+                <span class="stepTop"></span>
+                <span class="stepTop"></span>
+                <span class="stepTop"></span>
+                <span class="stepTop"></span>
+                <span class="stepTop"></span>
+            </div>
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+                <h2>Section 1 of 6 - Tuition</h2>
+                <section>
+                    <p>
+                        How many credits are you planning on taking this semester?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">The average semester credit load for college students is 15 credits, equivalent to five courses. This balanced approach allows you to meet graduation requirements on time while ensuring a manageable workload.</span>
+                        </span>
+                    </p>
+                    <input type="text" name="creditCount" maxlength="2" id="creditCount" required
+                        oninput="this.className = ''" />
+                </section>
+
+                <section>
+                    <p>
+                        Will you be attending Ridgewater online?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">At Ridgewater, online course tuition is currently $219.27 per credit. This is about $15 more per credit than traditional on-campus tuition.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="attendOnline" id="attendOnlineYes">
+                        Yes
+                    </label><br>
+                    <label>
+                        <input type="radio" name="attendOnline" id="attendOnlineNo">
+                        No
+                    </label>
+                </section>
+
+                <section>
+                    <p>
+                        Select which program you are enrolling in:
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">At Ridgewater, tuition is dependant on the program the student is enrolled in. There are a few programs that have different tuition standards than the rest.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="programEnrollment" id="nursingASBS">
+                        Nursing - Associates Degree and Bachelor of Science
+                    </label><br>
+                    <label>
+                        <input type="radio" name="programEnrollment" id="nursingPractical">
+                        Nursing - Practical Nursing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="programEnrollment" id="vetTech">
+                        Veterinary Technology
+                    </label><br>
+                    <label>
+                        <input type="radio" name="programEnrollment" id="otherProgram">
+                        Other
+                    </label>
+                </section>
+
+                <section>
+                    <p>
+                        Are you 62 years old or older?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">At Ridgewater, the senior citizen tuition rate for older students is about $170 less than the standard tuition rate.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="ageSixtyTwo" id="ageSixtyTwoYes" onclick="calculateTuition()">
+                        Yes
+                    </label><br>
+                    <label>
+                        <input type="radio" name="ageSixtyTwo" id="ageSixtyTwoNo" onclick="calculateTuition()">
+                        No
+                    </label>
+                </section>
+            </div>
+
+            <div class="tab">
+                <h2>Section 2 of 6 - Room and Board</h2>
+                <p id="paragraph"></p>
+                <section>
+                    <p>
+                        Will you be living off campus/on your own?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Off-campus students bear additional expenses like rent, utilities, groceries, and transportation.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="liveOffCampus" id="offCampusYes" onclick="showRentAmount()">
+                        Yes
+                    </label><br>
+                    <label>
+                        <input type="radio" name="liveOffCampus" id="offCampusNo" class=" " onclick="hideRentAmount(); calculateRoomBoard()">
+                        No
+                    </label>
+                </section>
+
+                <section id="section--rentAmount" class="hidden">
+                    <p>
+                        Please include your expected rent cost (per month):
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">According to <i>RentCafe</i>, the price range for a 1-bedroom apartment in Kandiyohi County, MN is between $395 and $838.</span>
+                        </span>
+                    </p>
+                    <label> $
+                        <input type="text" name="rentAmount" id="rentAmount" placeholder="850" class="" oninput="calculateRoomBoard()"/></label>
+                </section>
+            </div>
+
+            <div class="tab">
+                <h2>Section 3 of 6 - Books and Supplies</h2>
+                <section>
+                    <p>
+                        Do you plan to rent or buy your textbooks?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Renting college books offers short-term access at a lower cost, saving money. Buying provides ownership but is often more expensive.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="bookbuying" id="bookbuyingRent" onclick="calculateBooks()">
+                        Rent
+                    </label><br>
+                    <label>
+                        <input type="radio" name="bookbuying" id="bookbuyingBuy" onclick="calculateBooks()">
+                        Buy
+                    </label><br>
+                    <label>
+                        <input type="radio" name="bookbuying" id="bookbuyingUncertain" onclick="calculateBooks()">
+                        I'm not sure
+                    </label>
+                </section>
+                <section>
+                    <p>
+                        Which of the following are you planning on purchasing?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Essential college supplies include notebooks, pens, a laptop, backpack, planner, and basic stationery. Tailor your list to your courses and personal study preferences for a successful academic year.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="checkbox" name="backpack" id="backpack">
+                        Backpack
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="planner" id="planner">
+                        Planner
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="genSupplies" id="genSupplies">
+                        General supplies
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="laptop" id="laptop">
+                        Laptop
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="labEquipment" id="labEquipment">
+                        Lab equipment
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="none" id="none" onclick="calculateSupplies()">
+                        None of the above
+                    </label>
+                </section>
+            </div>
+
+            <div class="tab">
+                <h2>Section 4 of 6 - Transportation Expenses</h2>
+                <section>
+                    <p>
+                        Will you travel to the college consistently?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">In this case, consistently is defined by traveling to the college between 3-5 days per week.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="travel" id="travelYes" onclick="showMilesAway()">
+                        Yes
+                    </label><br>
+                    <label>
+                        <input type="radio" name="travel" id="travelNo" onclick="hideMilesAway(); calculateTravelCost()">
+                        No
+                    </label><br>
+                    <label>
+                        <input type="radio" name="travel" id="travelUncertain" onclick="hideMilesAway(); calculateTravelCost()">
+                        I'm not sure
+                    </label>
+                </section>
+                <section id="section--milesAway" class="hidden">
+                    <section>
+                        <p>
+                            About how many miles away do you live from your chosen campus?
+                            <span class="tooltip">
+                                <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                                <span class="tooltiptext">You can find the amount of miles between you and your campus by using an online map like <a href="https://www.google.com/maps/dir//Ridgewater+College,+15th+Avenue+Northwest,+Willmar,+MN/@45.1386671,-95.1551663,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x52b55f1aa56df2c1:0x2a02b9dc7dfb23e9!2m2!1d-95.0727654!2d45.1385756?entry=ttu" target="_blank">Google Maps <img src="assets/icons/icons8-new-tab-30.png" style="display: inline;" width="12" height="12"></a> and inputting your address as the starting point and Ridgewater College as the ending point.</span>
+                            </span>
+                        </p>
+                        <label>
+                            <input type="text" name="milesAway" id="milesAway" placeholder="25"
+                                oninput="this.className = ''" /></label>
+                    </section>
+                    <section>
+                        <p>
+                            Will you mainly drive, carpool, or take a bus?
+                            <span class="tooltip">
+                                <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                                <span class="tooltiptext">Carpooling and taking a bus are usually more cost effective than driving solo.</span>
+                            </span>
+                        </p>
+                        <label>
+                            <input type="radio" name="travelMode" id="travelModeDrive" onclick="showMPG(); calculateTravelCost()">
+                            Drive
+                        </label><br>
+                        <label>
+                            <input type="radio" name="travelMode" id="travelModeCarpool" onclick="hideMPG(); calculateTravelCost()">
+                            Carpool
+                        </label><br>
+                        <label>
+                            <input type="radio" name="travelMode" id="travelModeBus" onclick="hideMPG(); calculateTravelCost()">
+                            Take a bus
+                        </label><br>
+                        <label>
+                            <input type="radio" name="travelMode" id="travelModeUncertain" onclick="hideMPG(); calculateTravelCost()">
+                            I'm not sure
+                        </label><br><br>
+                    </section>
+                    <section id="section--MPG" class="hidden">
+                        <p>
+                            What is your primary vehicle's average miles per gallon?
+                            <span class="tooltip">
+                                <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                                <span class="tooltiptext">You can find your primary vehicle's average miles per gallon in your owner's manual or by dividing the average number of miles you get on a full tank by the number of gallons your vehicle's tank holds.</span>
+                            </span>
+                        </p>
+                        <input type="text" name="MPG" id="MPG" placeholder="30" oninput="this.className = ''" /></label>
+                    </section>
+                </section>
+            </div>
+
+            <div class="tab">
+                <h2>Section 5 of 6 - Personal Expenses</h2>
+                <section>
+                    <p>
+                        Please add any additional one-time personal expenses here:
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Examples of some one-time personal expense are furniture and room essentials, memberships or certifications, security deposit for housing, and study abroad expenses.</span>
+                        </span>
+                    </p>
+                    <label>$
+                        <input type="text" name="oneTimeExpense" id="oneTimeExpense" placeholder="750"
+                            oninput="this.className = ''" />
+                    </label>
+                </section>
+                <section>
+                    <p>
+                        Please add any additional monthly personal expenses here:
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Examples of some monthly personal expenses are ultilities, groceries, cell phone bill, insurance, personal care items (ex: toiletries), laundry, and entertainment.</span>
+                        </span>
+                    </p>
+                    <label>$
+                        <input type="text" name="monthlyExpense" id="monthlyExpense" placeholder="60"
+                            oninput="this.className = ''" onkeyup="calculatePersonalExpenses()"/>
+                    </label>
+                </section>
+            </div>
+
+            <div class="tab">
+                <h2>Section 6 of 6 - Financial Aid and Scholarships</h2>
+                <section>
+                    <p>
+                        Do you expect to recieve any financial aid that will reduce your final college cost?
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">Financial aid can be recieved through the Free Application for Federal Student Aid (FAFSA), internal and external scholarships or grants, and money gifted through friends and family.</span>
+                        </span>
+                    </p>
+                    <label>
+                        <input type="radio" name="financialAid" id="financialAidYes" onclick="showFinAidAmount()">
+                        Yes
+                    </label><br>
+                    <label>
+                        <input type="radio" name="financialAid" id="financialAidNo" class=" " onclick="hideFinAidAmount()">
+                        No
+                    </label>
+                </section>
+
+                <section id="section--finAidAmount" class="hidden">
+                    <p>
+                        Please include the amount you expect to recieve:
+                        <span class="tooltip">
+                            <sup><img src="./assets/icons/circled-question-mark-13.png"></sup>
+                            <span class="tooltiptext">The amount you recieved/expect to recieve will be subtracted from your overall college cost.</span>
+                        </span>
+                    </p>
+                    <label> $
+                        <input type="text" name="finAidAmount" id="finAidAmount" placeholder="2500" class="" onkeyup="calculateFinAid();"/></label>
+                </section>
+            </div>
+
+            <div style="overflow:auto;">
+                <div>
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                        class="button button--bordered button--hover button--active button--float-left">Previous</button>
+                    <a id="submit-btn"><button type="button" id="nextBtn" onclick="calculateFinalCost(); nextPrev(1)"
+                        class="button button--bordered button--hover button--active button--float-right">Next</button></a>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:40px;">
+                <span class="stepBottom"></span>
+                <span class="stepBottom"></span>
+                <span class="stepBottom"></span>
+                <span class="stepBottom"></span>
+                <span class="stepBottom"></span>
+                <span class="stepBottom"></span>
+            </div>
+
+        </form>
+    </main>
+
+</body>
+
+</html>

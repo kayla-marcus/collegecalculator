@@ -1,0 +1,10 @@
+/* IMPORTS MUST GO BEFORE ANY STYLE DECLARATIONS */
+@import './css/global.css';
+@import './css/reset.css';
+@import './css/intro.css';
+@import './css/util.css';
+@import './css/form.css';
+@import './css/tooltip.css';
+@import './css/formsteps.css';
+@import './css/results.css';
+/* @import url("https://www.w3schools.com/w3css/4/w3.css"); */

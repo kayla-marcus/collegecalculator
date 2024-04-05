@@ -1,0 +1,33 @@
+/* Form Steps Styles */
+/* Template from W3 Schools */
+/* https://www.w3schools.com/howto/howto_js_form_steps.asp */
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+    background-color: #ffc2c2;
+  }
+/* Hide all steps by default: */
+.tab {
+    display: none;
+  }
+  /* Make circles that indicate the steps of the form: */
+.stepTop,
+.stepBottom {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: .7;
+  }
+  /* Mark the active step: */
+.stepTop.active, .stepBottom.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .stepTop.finish, .stepBottom.finish {
+    background-color: #B30736;
+  }

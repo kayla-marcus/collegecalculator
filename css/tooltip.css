@@ -1,0 +1,119 @@
+/* Tooltip Styles */
+.question__icon::after {
+    content: '\1f60f';
+}
+
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    font-size: 14px;
+    visibility: hidden;
+    width: 15rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    animation: opac 1s
+}
+
+@keyframes opac {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@media (max-width: 720px) {
+    /* Tooltip text */
+.tooltip .tooltiptext {
+    font-size: 14px;
+    visibility: hidden;
+    width: 15rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    left: -90px;
+    z-index: 1;
+}
+}
+
+@media (max-width: 600px) {
+    /* Tooltip text */
+.tooltip .tooltiptext {
+    font-size: 14px;
+    visibility: hidden;
+    width: calc(100vw - 350px);
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    left: -100px;
+    z-index: 1;
+}
+}
+
+@media (max-width: 530px) {
+    /* Tooltip text */
+.tooltip .tooltiptext {
+    font-size: 14px;
+    visibility: hidden;
+    width: calc(100vw - 250px);
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    left: -90px;
+    z-index: 1;
+}
+}
+
+@media (max-width: 400px) {
+    /* Tooltip text */
+.tooltip .tooltiptext {
+    font-size: 14px;
+    visibility: hidden;
+    width: calc(100vw - 175px);
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    left: -80px;
+    z-index: 1;
+}
+}

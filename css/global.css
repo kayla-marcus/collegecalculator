@@ -1,0 +1,51 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    font-size: 1rem;
+}
+html {
+    font-family: 'Inter', sans-serif;
+    color: black;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+u {
+    text-underline-position: under;
+}
+
+.page {
+    position: relative;
+}
+.page .content {
+    flex-grow: 1;
+}
+header {
+    background-color: #B30736;
+    color: white;
+}
+header h1 {
+    margin-left: 1rem;
+    padding: 2rem;
+}
+
+.button {
+    color: white;
+    background-color: #B30736;
+    padding: 1rem 2rem;
+    margin-top: 3rem;
+}
+.button--bordered {
+    border-radius: 15px;
+    border-style: none;
+}
+
+.button--hover:hover {
+    background-color: #ff0044;
+    cursor: pointer;
+}
+
+.button--active:active {
+    background-color: #66051f;
+}

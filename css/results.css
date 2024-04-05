@@ -1,0 +1,181 @@
+/* Results Page Styles */
+.main__results {
+    margin-left: 5rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.downloadResults {
+    position: absolute;
+    top: -1rem;
+    right: 2rem;
+    padding: 3px;
+}
+
+.downloadResults--content {
+    font-size: 1rem;
+}
+
+.downloadResults--shadow {
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.downloadResults:hover{
+    cursor:pointer;
+    box-shadow: none;
+}
+
+.downloadResults:active {
+    background-color: lightgrey;
+}
+
+.main__results h2 {
+    text-transform: uppercase;
+}
+
+.main__results div {
+    margin-top: 1rem;
+}
+
+.main__results h3, h4{
+    color: #66051f;
+}
+
+.main__results div span {
+    font-size: 3rem;
+}
+
+.results {
+    gap: 5rem;
+    text-align: center;
+}
+
+.results--flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.results div span {
+    font-size: 2rem;
+}
+
+.container__piechart {
+    background-color: #B30736;
+    margin-top: 2rem;
+    padding: 1rem 0rem;
+}
+.container__totalCost, .container__finalCost {
+    background-color: rgb(253, 232, 232);
+    margin: 2rem;
+}
+
+.totalCost--flex, .finalCost--flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.finalCost--section {
+    margin-left: 5rem;
+    padding-bottom: 3rem;
+    max-width: 30%;
+}
+
+.finalCost--section h3 {
+    text-transform: uppercase;
+    margin-top: 3rem;
+    color: #66051f;
+}
+
+.finalCost--section span {
+    font-variant: small-caps;
+    text-transform: lowercase;
+}
+
+.finalCost--section p {
+    margin-top: 1rem;
+}
+
+.finalCost--section ul {
+    margin-top: .5rem;
+    font-size: .9rem;
+    max-width: 90%;
+}
+
+.finalCost--section a {
+    font-weight: bold;
+    color: #66051f;
+}
+
+.finalCost--section ul li {
+    list-style: square outside url(../assets/icons/icons8-arrow-30.png);
+}
+
+#totalCostChart, #tuitionVsOtherExpenses {
+    width:100%;
+    max-width: 600px;
+}
+
+#finalCostChart {
+    max-width: 600px;
+}
+
+#totalCostChart, #tuitionVsOtherExpenses {
+    margin: 2rem 0rem;
+}
+
+#totalCostChart {
+    margin-left: 5rem;
+}
+
+#finalCostChart {
+    margin: 5rem 2rem 2rem 3rem;
+}
+
+@media (max-width: 1200px) {
+    .results--flex div {
+        flex: 25%;
+        justify-content: space-around;
+    }
+    .finalCost--section {
+        max-width: 80%;
+        padding-bottom: 1rem;
+    }
+    #totalCostChart, #tuitionVsOtherExpenses, #finalCostChart {
+        margin: 1rem auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .main__results {
+        margin-left: 2rem;
+        text-align: center;
+    }
+    .results--flex div {
+        justify-content: flex-start;
+    }
+    .downloadResults{
+        position: static;
+        margin: 5px 0;
+    }
+    .downloadResults button {
+        border: none;
+        box-shadow: none;
+    }
+    #totalCostChart, #tuitionVsOtherExpenses, #finalCostChart {
+        margin: 1rem auto;
+    }
+    .finalCost--section {
+        margin-left: 3rem;
+        margin-right: 1rem;
+    }
+    .finalCost--section p {
+        max-width: 75%;
+    }
+    .finalCost--section ul {
+        margin-top: .5rem;
+        font-size: .9rem;
+        max-width: 80%;
+    }
+}
