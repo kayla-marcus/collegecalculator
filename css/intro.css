@@ -14,7 +14,7 @@
 
 @media (max-width: 1200px) {
     .main__intro {
-        margin-left: 4rem;
+        margin-left: 1rem;
         max-width: 75%;
     }
     .main__intro p {
