@@ -1,27 +1,5 @@
 /* Intro Page Styles */
 
-@media (max-width: 1200px) {
-    .main__intro {
-        margin-left: 4rem;
-        max-width: 75%;
-    }
-    .main__intro p {
-        max-width: 75%;
-    }
-}
-@media (max-width: 720px) {
-    header h1 {
-        margin-left: 10px;
-        padding: 1rem;
-    }
-    .main__intro {
-        margin-left: 1rem;
-    }
-    .main__intro p {
-        max-width: 100%;
-    }
-}
-
 .main__intro {
     margin-left: 5rem;
     margin-top: 2rem;
@@ -34,6 +12,7 @@
 
 .main__intro button {
     margin-bottom: 3rem;
+}
 
 @media (max-width: 1200px) {
     .main__intro {
@@ -56,5 +35,8 @@
         max-width: 100%;
     }
 }
+
+// Some more comments here...
+    
 
 
