@@ -20,10 +20,10 @@ var semFinancialAid = Math.round(localStorage.getItem("financialAid"));
 var semfinalCost = Math.round(localStorage.getItem("finalCost"));
 
 semTuition = semTuition;
-document.getElementById("calcTuitionCost").innerHTML = semTuition;
+document.getElementById("calcTuitionCost").innerHTML = toString(semTuition);
 
 semRent = addCommas(semRent);
-document.getElementById("calcRoomBoard").innerHTML = semRent;
+document.getElementById("calcRoomBoard").innerHTML = toString(semRent);
 
 semBooksSupplies = addCommas(booksSuppliesCost);
 document.getElementById("calcBooksSupplies").innerHTML = semBooksSupplies;
